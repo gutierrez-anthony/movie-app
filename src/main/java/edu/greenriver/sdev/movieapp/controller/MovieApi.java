@@ -1,10 +1,12 @@
 package edu.greenriver.sdev.movieapp.controller;
 
 import edu.greenriver.sdev.movieapp.domain.Movie;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 // a web api to deliver movies
 @RestController
@@ -25,4 +27,24 @@ public class MovieApi {
     //REST apis are routes that pass through HTTP
     //(methods: GET, POST, PUT/PATCH, DELETE)
 
+    // respond to (GET) request at localhost:3000/movies/random
+    @GetMapping("movies/random")
+    public Movie getRandom() {
+        Random generator = new Random();
+        int index = generator.nextInt(movies.size());
+        return movies.get(index);
+    }
+
+    @GetMapping("movies/all")
+    public List<Movie> all() {
+        return movies;
+    }
+
+    public Movie byTitle(String title) {
+        return null;
+    }
+
+    public List<Movie> byYear(int year) {
+        return null;
+    }
 }
