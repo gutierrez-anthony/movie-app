@@ -7,20 +7,16 @@ import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-// @Data adds getters/setters/toString()/equals/hashcode...
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Movie {
+public class MovieReview {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String title;
-    private int releaseYear;
-    private String genre;
-    private String rating;
-    private boolean international;
+    private String movieTitle;
+    private int stars;
+    private String review;
 }
