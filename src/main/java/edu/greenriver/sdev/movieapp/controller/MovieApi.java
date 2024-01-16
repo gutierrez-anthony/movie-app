@@ -1,50 +1,56 @@
 package edu.greenriver.sdev.movieapp.controller;
 
 import edu.greenriver.sdev.movieapp.domain.Movie;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import edu.greenriver.sdev.movieapp.service.MovieService;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
+//REST apis are routes that pass through HTTP
+//(methods: GET, POST, PUT/PATCH, DELETE)
 // a web api to deliver movies
 @RestController
 public class MovieApi {
-    private List<Movie> movies = new ArrayList<>(List.of(
-        new Movie("Inception", 2010, "Science Fiction", "PG-13", false),
-        new Movie("The Shawshank Redemption", 1994, "Drama", "R", false),
-        new Movie("The Dark Knight", 2008, "Action", "PG-13", false),
-        new Movie("Pulp Fiction", 1994, "Crime", "R", false),
-        new Movie("Titanic", 1997, "Drama", "PG-13", false),
-        new Movie("The Godfather", 1972, "Crime", "R", false),
-        new Movie("Avatar", 2009, "Action", "PG-13", true),
-        new Movie("The Lord of the Rings: The Return of the King", 2003, "Fantasy", "PG-13", false),
-        new Movie("Jurassic Park", 1993, "Science Fiction", "PG-13", false),
-        new Movie("Forrest Gump", 1994, "Drama", "PG-13", false)
-    ));
+    private MovieService service;
 
-    //REST apis are routes that pass through HTTP
-    //(methods: GET, POST, PUT/PATCH, DELETE)
+    public MovieApi(MovieService service) {
+        this.service = service;
+    }
 
     // respond to (GET) request at localhost:3000/movies/random
     @GetMapping("movies/random")
     public Movie getRandom() {
-        Random generator = new Random();
-        int index = generator.nextInt(movies.size());
-        return movies.get(index);
+        return service.getRandomMovie();
     }
 
     @GetMapping("movies/all")
     public List<Movie> all() {
-        return movies;
+        return service.all();
     }
 
-    public Movie byTitle(String title) {
-        return null;
+    @GetMapping("movies/{title}")
+    public Movie byTitle(@PathVariable String title) {
+
+        return service.byTitle(title);
+    }
+    @GetMapping("movies/year/{year}")
+    public List<Movie> byYear(@PathVariable int year) {
+        return service.byYear(year);
+    }
+    @PostMapping("movies")
+    public void addMovie(@RequestBody Movie movie){
+        service.addMovie(movie);
     }
 
-    public List<Movie> byYear(int year) {
-        return null;
+    @PutMapping("movies/{title}")
+    public Movie updateMovie(@PathVariable String title,
+                            @RequestBody Movie updatedMovie){
+        return service.updateMovie(title, updatedMovie);
     }
+
+    @DeleteMapping("movies/{title}")
+    public void deleteMovie(@PathVariable String title){
+        service.deleteMovie(title);
+    }
+
 }
