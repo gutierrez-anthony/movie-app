@@ -71,6 +71,22 @@ public class MovieService {
         repository.save(movie);
     }
 
+    public Movie byId(int id){
+        return repository.findById(id).orElseThrow();
+    }
+
+    public Movie updateMovie(Movie updatedMovie, int id){
+        Movie currentMovie = repository.findById(id).orElseThrow();
+
+        currentMovie.setRating(updatedMovie.getRating());
+        currentMovie.setInternational(updatedMovie.isInternational());
+        currentMovie.setGenre(updatedMovie.getGenre());
+        currentMovie.setTitle(updatedMovie.getTitle());
+        currentMovie.setReleaseYear(updatedMovie.getReleaseYear());
+
+        // this is add or update
+        return repository.save(currentMovie);
+    }
    /* public Movie updateMovie(String title, Movie updatedMovie) {
         List<Movie> movies = repository.findAll();
         Movie savedMovie = movies.get(movieIndexOf(title));
@@ -89,4 +105,8 @@ public class MovieService {
         int index = movieIndexOf(title);
         movies.remove(index);
     }*/
+
+    public void deleteMovie(int id) {
+        repository.deleteById(id);
+    }
 }
