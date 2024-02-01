@@ -1,74 +1,35 @@
-const data = [
-    {
-        "title": "Inception",
-        "year": 2010,
-        "genre": "Science Fiction",
-        "rating": "PG-13",
-        "international": false
-    },
-    {
-        "title": "The Shawshank Redemption",
-        "year": 1994,
-        "genre": "Drama",
-        "rating": "R",
-        "international": false
-    },
-    {
-        "title": "The Dark Knight",
-        "year": 2008,
-        "genre": "Action",
-        "rating": "PG-13",
-        "international": false
-    },
-    {
-        "title": "Pulp Fiction",
-        "year": 1994,
-        "genre": "Crime",
-        "rating": "R",
-        "international": false
-    },
-    {
-        "title": "Titanic",
-        "year": 1997,
-        "genre": "Drama",
-        "rating": "PG-13",
-        "international": false
-    },
-    {
-        "title": "The Godfather",
-        "year": 1972,
-        "genre": "Crime",
-        "rating": "R",
-        "international": false
-    },
-    {
-        "title": "Avatar",
-        "year": 2009,
-        "genre": "Action",
-        "rating": "PG-13",
-        "international": true
-    },
-    {
-        "title": "The Lord of the Rings: The Return of the King",
-        "year": 2003,
-        "genre": "Fantasy",
-        "rating": "PG-13",
-        "international": false
-    },
-    {
-        "title": "Jurassic Park",
-        "year": 1993,
-        "genre": "Science Fiction",
-        "rating": "PG-13",
-        "international": false
-    },
-    {
-        "title": "Forrest Gump",
-        "year": 1994,
-        "genre": "Drama",
-        "rating": "PG-13",
-        "international": false
+// wait until the page loads
+window.onload = function () {
+    const uri = "http://localhost:3000/api/v1/movies/all";
+    const config = {
+        method: 'get'
     }
-];
+    fetch(uri, config)
+        .then(function (response) {
+            console.log(response);
 
-console.log(data);
+            // returns another promise
+            return response.json();
+        })
+        .then(function(data) {
+            console.log(data);
+            showMovies(data);
+        });
+
+    // update our UI
+}
+
+function showMovies(movies) {
+    const section = document.querySelector("#movies");
+    console.log(section);
+
+    // Loop over each of my movies and create a nested elements
+    for (let i = 0; i < movies.length; i++) {
+        const movie = movies[i];
+        section.innerHTML += `<div class="movie">
+                                    <h2>${movie.title}</h2>
+                                    <p>ID ${movie.id}</p>
+                                    <p>Genre: ${movie.genre}</p>
+                                </div>`;
+    }
+}

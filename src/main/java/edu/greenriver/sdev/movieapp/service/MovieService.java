@@ -67,8 +67,8 @@ public class MovieService {
         return results;
     }
 
-    public void addMovie(Movie movie) {
-        repository.save(movie);
+    public Movie addMovie(Movie movie) {
+        return repository.save(movie);
     }
 
     public Movie byId(int id){
