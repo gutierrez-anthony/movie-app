@@ -4,14 +4,24 @@
         <meta charset="UTF-8">
         <title>A movie page</title>
         <script src="scripts/data.js"></script>
+        <link rel="stylesheet" href="styles/reset.css">
+        <link rel="stylesheet" href="styles/styles.css">
     </head>
     <body>
-        <h1> A movie page</h1>
+        <h1>A movie page</h1>
         <a href="page.html"> back to test page</a>
         <section id="movies">
-            <div class="movie">
-
-            </div>
         </section>
+        <form>
+            <section class="form-group">
+                <label for="title">Title</label>
+                <input type="text" id="title">
+            </section>
+            <section class="form-group">
+                <label for="genre">Genre</label>
+                <input type="text" id="genre">
+            </section>
+            <button type="submit">Submit</button>
+        </form>
     </body>
 </html>

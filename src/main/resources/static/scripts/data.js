@@ -28,7 +28,7 @@ function showMovies(movies) {
         const movie = movies[i];
         section.innerHTML += `<div class="movie">
                                     <h2>${movie.title}</h2>
-                                    <p>ID ${movie.id}</p>
+                                    <p>ID #${movie.id}</p>
                                     <p>Genre: ${movie.genre}</p>
                                 </div>`;
     }
