@@ -1,9 +1,14 @@
 // wait until the page loads
-window.onload = function () {
+window.onload = async function () {
     const uri = "http://localhost:3000/api/v1/movies/all";
     const config = {
         method: 'get'
     }
+    const response = await fetch(uri, config);
+    const data = await response.json();
+    showMovies(data);
+
+    /* Promises
     fetch(uri, config)
         .then(function (response) {
             console.log(response);
@@ -14,7 +19,7 @@ window.onload = function () {
         .then(function(data) {
             console.log(data);
             showMovies(data);
-        });
+        });*/
 
     // update our UI
 }
@@ -33,3 +38,4 @@ function showMovies(movies) {
                                 </div>`;
     }
 }
+
