@@ -13,6 +13,7 @@ import java.util.List;
 // a web api to deliver movies
 @RestController
 @RequestMapping("api/v1/movies")
+@CrossOrigin(origins = "*") //XSS -> cross site scripting (unwanted javascript code to alter personal code)
 public class MovieApi {
     private MovieService service;
 

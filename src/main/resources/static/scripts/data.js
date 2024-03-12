@@ -1,6 +1,6 @@
 // wait until the page loads
 window.onload = async function () {
-    const uri = "http://localhost:3000/api/v1/movies/all";
+    const uri = `${window.location.origin}/api/v1/movies/all`;
     const config = {
         method: 'get'
     }
@@ -38,10 +38,10 @@ async function addMovie(event) {
 
     const newMovie = {
         title: document.querySelector("#title").value,
-        genre: document.querySelector("genre").value
-    };
+        genre: document.querySelector("#genre").value
+    }
     //console.log("Button Clicked");
-    const uri = "http://localhost:3000/api/v1/movies";
+    const uri = `${window.location.origin}/api/v1/movies`;
     const config = {
         method: "post",
         headers: {"Content-Type": "application/json"
