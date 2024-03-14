@@ -35,4 +35,24 @@ class MovieAppApplicationTests {
         assertNotNull(movies);
         assertTrue(movies.length > 0);
     }
+
+    @Test
+    public void addMovieTest() {
+        String url = "http://localhost:" + port + "/api/v1/movies";
+
+        Movie movie = new Movie(0, "Dune 2", 2024,
+                "Science Fiction", "5 stars", true);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity request = new HttpEntity(movie, headers);
+
+        ResponseEntity<Movie> response = rest.exchange(url, HttpMethod.POST, request, Movie.class);
+
+        Movie addMovie = response.getBody();
+
+        assertEquals(response.getStatusCode(), HttpStatus.CREATED);
+        assertNotNull(addMovie);
+        assertTrue(addMovie.getId() > 0);
+    }
 }
